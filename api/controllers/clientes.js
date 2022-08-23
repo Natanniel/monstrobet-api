@@ -1,3 +1,6 @@
+const TelegramBot = require('node-telegram-bot-api');
+const bot = new TelegramBot('5613936192:AAGBEBBB5xvSCJwFpSTnrYALnWYusVXX4DI', { polling: true });
+    
 
 class Clientes {
 
@@ -44,8 +47,9 @@ class Clientes {
             }
         })
         await cliente.save()
-
+        await bot.sendMessage('782375549', '*✨ Novo usuario cadastrado*\n___'+req.body.email+'___', { parse_mode: 'Markdown' });
         res.send()
+        
     }
 
     async emailLogin(req, res) {
@@ -76,7 +80,10 @@ class Clientes {
         })
         cliente.pediuSuporte = true
         await cliente.save()
+        await bot.sendMessage('782375549', '*🚨 Solicitacao de suporte*\n___'+req.body.chatid+'___', { parse_mode: 'Markdown' });
+        
         res.send()
+        
     }
 
     async hall(req, res) {
@@ -118,6 +125,8 @@ class Clientes {
             let aux = await Clientes.findOne({ 'telegram.tentativaChatID': req.query.chatid })
             aux.telegram.tentativaChatID = ''
             aux.telegram.chatID = req.query.chatid
+            await bot.sendMessage('782375549', '*🔐 Login realizado*\n___'+req.body.chatid+'___', { parse_mode: 'Markdown' });
+        
             await aux.save()
         } else {
             let aux = await Clientes.findOne({ 'telegram.tentativaChatID': req.query.chatid })
@@ -173,6 +182,7 @@ class Clientes {
         await cliente.save()
         res.send()
     }
+   
     async interrompido(req, res) {
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({
