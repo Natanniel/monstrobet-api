@@ -19,7 +19,16 @@ class Servidor {
     }
 
     async kiwify(req,res){
-        console.log(re.body)
+        console.log(req.body)
+        if(req.body.order_status == 'paid'){
+            let Clientes = require('../models/clientes')
+            let cliente = await Clientes.findOne({ email:req.body.Customer.email }) 
+            
+          
+        }
+
+            
+        
         res.send()
     }
 
