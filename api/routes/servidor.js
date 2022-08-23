@@ -11,4 +11,6 @@ router.post('/servidor/iniciar', Servidor.iniciarCliente)
 router.post('/servidor/metabatida', Servidor.metabatida)
 
 router.put('/servidor/cancelar', Servidor.cancelaIniciar)
+
+//router.
 module.exports = router; 
