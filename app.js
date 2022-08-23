@@ -10,7 +10,7 @@ class App {
 
     this.server.use(bodyParser.json());
     this.server.use(bodyParser.urlencoded({ extended: true }));
-    this.server.use(cors({ credentials: true }));
+    this.server.use(cors({ }));
 
     //  let db_string = "mongodb+srv://sis:vukfum-jiGsuj-0jyvzy@core.ttzho.mongodb.net/core?retryWrites=true&w=majority";
     let db_string = "mongodb+srv://superuserprovision:Z5rUXK6Mm6DmHM6t@cluster0.vfchy.mongodb.net/rzblaze?retryWrites=true&w=majority";
