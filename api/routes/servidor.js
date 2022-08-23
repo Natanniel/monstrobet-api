@@ -9,6 +9,7 @@ router.get('/servidor', Servidor.seleciona)
 router.post('/servidor/novo', Servidor.criarNovo);
 router.post('/servidor/iniciar', Servidor.iniciarCliente)
 router.post('/servidor/metabatida', Servidor.metabatida)
+router.post('/kiwify', Servidor.metabatida)
 
 router.put('/servidor/cancelar', Servidor.cancelaIniciar)
 
