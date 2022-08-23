@@ -18,7 +18,7 @@ class Servidor {
         res.send(servidor)
     }
 
-    async metabatida(req,res){
+    async kiwify(req,res){
         console.log(re.body)
         res.send()
     }
