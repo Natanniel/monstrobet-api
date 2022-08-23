@@ -20,7 +20,7 @@ class Servidor {
 
     async metabatida(req,res){
         console.log(re.body)
-        res.send
+        res.send()
     }
 
     async metabatida(req,res){
