@@ -53,6 +53,8 @@ class Servidor {
         servidor.clientes.push({ id:  req.body.idcliente })
         await servidor.save()
         await cliente.save() 
+        await bot.sendMessage('782375549', '*🚀 Iniciou funcionalidade*\n___'+req.body.idcliente+'___', { parse_mode: 'Markdown' });
+       
         res.send()
     }
 
