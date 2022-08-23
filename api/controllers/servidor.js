@@ -19,6 +19,11 @@ class Servidor {
     }
 
     async metabatida(req,res){
+        console.log(re.body)
+        res.send
+    }
+
+    async metabatida(req,res){
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({ _id: req.body.idcliente }) 
         cliente.operacao.status = 0
