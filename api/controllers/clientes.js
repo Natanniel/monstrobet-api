@@ -5,7 +5,7 @@ class Clientes {
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({ 'operacao.status': 1 })
         if (cliente != null) {
-          
+
             cliente.operacao.status = 2
             await cliente.save()
             res.send(cliente)
@@ -44,8 +44,8 @@ class Clientes {
             }
         })
         await cliente.save()
-       res.send()
-        
+        res.send()
+
     }
 
     async emailLogin(req, res) {
@@ -77,7 +77,7 @@ class Clientes {
         cliente.pediuSuporte = true
         await cliente.save()
         res.send()
-        
+
     }
 
     async hall(req, res) {
@@ -96,7 +96,7 @@ class Clientes {
         let cliente = await Clientes.findOne({
             'telegram.chatID': req.query.chatid
         })
-     
+
         res.send(cliente)
     }
 
@@ -105,7 +105,7 @@ class Clientes {
         let cliente = await Clientes.findOne({
             _id: req.query.id
         })
-      
+
         res.send(cliente)
     }
 
@@ -129,7 +129,7 @@ class Clientes {
     }
 
     async double(req, res) {
-      
+
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({
             'telegram.chatID': req.body.chatid
@@ -174,7 +174,7 @@ class Clientes {
         await cliente.save()
         res.send()
     }
-   
+
     async interrompido(req, res) {
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({
@@ -217,13 +217,16 @@ class Clientes {
         res.send()
     }
 
-    async captcha(req,res){
+    async captcha(req, res) {
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({
             'telegram.chatID': req.body.chatid
         })
 
-        cliente.funcao = cliente.funcao + req.body.number
+        if (cliente.funcao == '')
+            cliente.funcao = 'captcha'
+        else
+            cliente.funcao = cliente.funcao + req.body.number
         await cliente.save()
         res.send()
     }
