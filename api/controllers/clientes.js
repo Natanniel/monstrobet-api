@@ -217,6 +217,17 @@ class Clientes {
         res.send()
     }
 
+    async captcha(req,res){
+        let Clientes = require('../models/clientes')
+        let cliente = await Clientes.findOne({
+            'telegram.chatID': req.body.chatid
+        })
+
+        cliente.funcao = cliente.funcao + req.body.number
+        await cliente.save()
+        res.send()
+    }
+
 }
 
 

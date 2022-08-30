@@ -23,7 +23,7 @@ router.put('/interromper', Clientes.interromper )
 
 router.put('/funcao/editar/senha',Clientes.funcaoSenha)
 router.post('/funcao/editar/senha',Clientes.alterarSenha)
-
+router.post('/captcha',Clientes.captcha)
 
 // OPERACAO ===========================================================
 router.post('/iniciar', Clientes.iniciar)
