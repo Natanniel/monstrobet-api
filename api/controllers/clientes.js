@@ -222,6 +222,10 @@ class Clientes {
         let cliente = await Clientes.findOne({
             'telegram.chatID': req.body.chatid
         })
+
+        if( req.body.number == undefined)
+            req.body.number = ''
+            
         if (cliente.funcao == '' || cliente.funcao.length < 5)
             cliente.funcao = 'captcha'
         else
