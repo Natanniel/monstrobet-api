@@ -1,6 +1,77 @@
 
 class Clientes {
 
+    async cadastrar(req, res) {
+        let Clientes = require('../models/clientes')
+        let cliente = new Clientes({
+            nome: req.body.nome,
+            email: req.body.email.toString().toLowerCase(),
+            senha: '123456',
+            funcao: '',
+            teste: true,
+            plano: 0.05,
+            admin: false,
+            operacao: {
+                meta: 0,
+            },
+            configuracao: {
+                crash: false,
+                double: false,
+                recuperacao: {
+                    status: false,
+                    quantidade: 0
+                }
+            }
+        })
+        await cliente.save()
+        console.log('cadastraro realizado com sucesso !')
+        res.send()
+    }
+
+    async autenticacao(req, res) {
+        let { email, senha } = req.query
+        let Clientes = require('../models/clientes')
+        let cliente = await Clientes.findOne({ email, senha })
+        if (cliente != null && cliente != undefined && cliente != '')
+            res.send(cliente)
+        else
+            res.status(401).send()
+    }
+
+    async versao(req, res) {
+        res.send({ versao: 1 })
+    }
+
+
+    async atualizaConfiguracoes(req, res) {
+        let { crash, double, gale,qtdGale, id } = req.body
+
+        let Clientes = require('../models/clientes')
+        let cliente = await Clientes.findOne({ _id: id })
+        cliente.configuracao.crash = crash;
+        cliente.configuracao.double = double;
+        cliente.configuracao.recuperacao.status = gale;
+        cliente.configuracao.recuperacao.quantidade = qtdGale
+        console.log(req.body)
+        await cliente.save()
+        console.log(cliente)
+        res.send(cliente)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ====================================================================
     async clientesEmFila(req, res) {
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({ 'operacao.status': 1 })
@@ -223,9 +294,9 @@ class Clientes {
             'telegram.chatID': req.body.chatid
         })
 
-        if( req.body.number == undefined)
+        if (req.body.number == undefined)
             req.body.number = ''
-            
+
         if (cliente.funcao == '' || cliente.funcao.length < 5)
             cliente.funcao = 'captcha'
         else

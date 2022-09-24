@@ -3,6 +3,20 @@ const router = express.Router();
 const Clientes = require('../controllers/clientes');
 
 
+
+
+router.get('/autenticacao',Clientes.autenticacao)
+router.get('/versao', Clientes.versao)
+
+router.post('/cliente', Clientes.cadastrar)
+router.post('/cliente/atualizar', Clientes.atualizaConfiguracoes)
+
+
+
+
+
+
+
 router.get('/email', Clientes.verificaSeEmailJaEstaCadastrado);
 router.get('/verificaestalogando',Clientes.verificaSeEstaLogando)
 router.get('/senhalogin',Clientes.senhaLogin)
