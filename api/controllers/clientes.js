@@ -163,9 +163,11 @@ class Clientes {
     }
 
     async obtemCliente(req, res) {
+        console.log('chegoi aqui')
         let Clientes = require('../models/clientes')
+       
         let cliente = await Clientes.findOne({
-            'telegram.chatID': req.query.chatid
+            'email': req.params.email
         })
 
         res.send(cliente)
@@ -227,10 +229,10 @@ class Clientes {
 
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({
-            _id: req.body.id
+            email: req.body.email
         })
 
-        cliente.operacao.meta = req.body.meta
+        cliente.meta = req.body.meta
         await cliente.save()
         res.send()
     }

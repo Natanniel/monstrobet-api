@@ -5,6 +5,10 @@ const Clientes = require('../controllers/clientes');
 router.get('/versao', Clientes.versao)
 
 router.get('/login', Clientes.autenticacao)
+router.get('/usuario/:email', Clientes.obtemCliente)
+router.get('/usuario/atualizameta', Clientes.atualizaMeta)
+
+
 
 /*
 router.get('/autenticacao',Clientes.autenticacao)

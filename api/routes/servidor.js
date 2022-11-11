@@ -2,16 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Servidor = require('../controllers/servidor');
 
-router.get('/servidor', Servidor.seleciona)
-//router.get('/servidor', Servidor.seleciona)
+router.post('/servidor/sinal', Servidor.enviaSinal)
+router.get('/sinal/obtem',Servidor.coletaSinal)
 
-
-router.post('/servidor/novo', Servidor.criarNovo);
-router.post('/servidor/iniciar', Servidor.iniciarCliente)
-router.post('/servidor/metabatida', Servidor.metabatida)
-router.post('/kiwify', Servidor.kiwify)
-
-router.put('/servidor/cancelar', Servidor.cancelaIniciar)
-
-//router.
 module.exports = router; 
