@@ -8,6 +8,7 @@ class Servidor {
         if (sinal) {
             sinal.cor = req.body.cor
             sinal.numero = sinal.numero + 1
+            await sinal.save()
         }
         else { 
             sinal = new Sinal({
