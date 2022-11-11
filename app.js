@@ -29,7 +29,9 @@ class App {
   routes() {
     this.server.use(require('./api/routes/clientes'))
     this.server.use(require('./api/routes/servidor'))
-   // this.server.use(require('./src/routes/maquinas'));
+  
+  
+    // this.server.use(require('./src/routes/maquinas'));
    // this.server.use(require('./src/routes/usuario'))
   }
 }

@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Clientes = require('../controllers/clientes');
 
-
-
-
-router.get('/autenticacao',Clientes.autenticacao)
 router.get('/versao', Clientes.versao)
+
+router.get('/login', Clientes.autenticacao)
+
+/*
+router.get('/autenticacao',Clientes.autenticacao)
+
 
 router.post('/cliente', Clientes.cadastrar)
 router.post('/cliente/atualizar', Clientes.atualizaConfiguracoes)
@@ -42,5 +44,5 @@ router.post('/captcha',Clientes.captcha)
 // OPERACAO ===========================================================
 router.post('/iniciar', Clientes.iniciar)
 router.get('/clientesemfila', Clientes.clientesEmFila)
-
+*/
 module.exports = router; 

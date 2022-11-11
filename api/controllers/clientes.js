@@ -29,9 +29,9 @@ class Clientes {
     }
 
     async autenticacao(req, res) {
-        let { email, senha } = req.query
+        let { email } = req.query
         let Clientes = require('../models/clientes')
-        let cliente = await Clientes.findOne({ email, senha })
+        let cliente = await Clientes.findOne({ email })
         if (cliente != null && cliente != undefined && cliente != '')
             res.send(cliente)
         else
@@ -52,9 +52,9 @@ class Clientes {
         cliente.configuracao.double = double;
         cliente.configuracao.recuperacao.status = gale;
         cliente.configuracao.recuperacao.quantidade = qtdGale
-        console.log(req.body)
+        // console.log(req.body)
         await cliente.save()
-        console.log(cliente)
+        // console.log(cliente)
         res.send(cliente)
     }
 
