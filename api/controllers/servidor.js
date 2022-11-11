@@ -7,7 +7,7 @@ class Servidor {
         let sinal = await Sinal.findOne({ referencia: 'rzblaze' })
         if (sinal) {
             sinal.cor = req.body.cor
-            sinal.numero = sinal.numero
+            sinal.numero = sinal.numero + 1
         }
         else { 
             sinal = new Sinal({
