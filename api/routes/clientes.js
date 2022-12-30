@@ -2,12 +2,22 @@ const express = require('express');
 const router = express.Router();
 const Clientes = require('../controllers/clientes');
 
+router.post("/usuario/cadastrar" , Clientes.cadastrar)
+router.post('/usuario/autenticacao', Clientes.autenticacao)
+
+router.get('/usuario/dados', Clientes.dados)
+
+router.post('/usuario/trocasenha', Clientes.senhaLogin)
+
+router.get("/usuario/:chatid" , Clientes.obtemCliente)
+
+/*
 router.get('/versao', Clientes.versao)
 
 router.get('/login', Clientes.autenticacao)
 router.get('/usuario/:email', Clientes.obtemCliente)
 router.get('/usuario/atualizameta', Clientes.atualizaMeta)
-
+*/
 
 
 /*

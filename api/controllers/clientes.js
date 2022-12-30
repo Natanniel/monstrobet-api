@@ -3,40 +3,81 @@ class Clientes {
 
     async cadastrar(req, res) {
         let Clientes = require('../models/clientes')
-        let cliente = new Clientes({
-            nome: req.body.nome,
-            email: req.body.email.toString().toLowerCase(),
-            senha: '123456',
-            funcao: '',
-            teste: true,
-            plano: 0.05,
-            admin: false,
-            operacao: {
-                meta: 0,
-            },
-            configuracao: {
-                crash: false,
-                double: false,
-                recuperacao: {
-                    status: false,
-                    quantidade: 0
-                }
+        let { nome, sobrenome, email, senha, cpf } = req.body
+
+        console.log(email)
+        // Valida email ja cadastrado
+        let cliente = await Clientes.findOne({ email: email })
+        if (!cliente) {
+
+            cliente = await Clientes.findOne({ cpf: cpf })
+            if (!cliente) {
+
+                cliente = new Clientes({
+                    nome, sobrenome, email, senha, cpf
+                })
+                await cliente.save()
+                res.send()
+
+            } else {
+                res.status(500).send({ message: "CPF ja registrado no sistema !" })
             }
-        })
-        await cliente.save()
-        console.log('cadastraro realizado com sucesso !')
-        res.send()
+
+        } else {
+            res.status(500).send({ message: "Email ja registrado no sistema !" })
+        }
+
+
+
+        // Valida email 
+
+
+        // await cliente.save()
+        // console.log('cadastraro realizado com sucesso !')
+
     }
 
     async autenticacao(req, res) {
-        let { email } = req.query
+
+        let { email, senha } = req.body
         let Clientes = require('../models/clientes')
-        let cliente = await Clientes.findOne({ email })
-        if (cliente != null && cliente != undefined && cliente != '')
-            res.send(cliente)
-        else
-            res.status(401).send()
+        let usuario = await Clientes.findOne({ email, senha })
+
+        if (usuario) {
+            const jwt = require("jsonwebtoken");
+            res.json({
+                token: jwt.sign({ usuario: usuario._id }, "b03e148fc2d70bb33bfbbf15b7eee9e7", { expiresIn: '7d' })
+            });
+
+        } else {
+            res.status(500).send({ message: "Usuario ou senha invalido" })
+        }
     }
+
+    async dados(req, res) {
+        // console.log(req.id)
+        let Clientes = require('../models/clientes')
+
+        let cliente = await Clientes.findOne({ _id: req.id })
+        let dados = {
+            saldo: cliente.saldo
+        }
+
+       // console.log(dados)
+        res.send(dados)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     async versao(req, res) {
         res.send({ versao: 1 })
@@ -44,7 +85,7 @@ class Clientes {
 
 
     async atualizaConfiguracoes(req, res) {
-        let { crash, double, gale,qtdGale, id } = req.body
+        let { crash, double, gale, qtdGale, id } = req.body
 
         let Clientes = require('../models/clientes')
         let cliente = await Clientes.findOne({ _id: id })
@@ -163,11 +204,10 @@ class Clientes {
     }
 
     async obtemCliente(req, res) {
-        console.log('chegoi aqui')
         let Clientes = require('../models/clientes')
-       
+
         let cliente = await Clientes.findOne({
-            'email': req.params.email
+            'chatid': req.params.chatid
         })
 
         res.send(cliente)
